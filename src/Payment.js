@@ -5,7 +5,7 @@ import { useStateValue } from "./StateProvider";
 import { Link, useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
-import { getBasketTotal } from "./reducer.js";
+import { getBasketTotal } from "./reducer";
 import axios from "./axios";
 
 function Payment() {
@@ -56,21 +56,18 @@ function Payment() {
       history.replaceState('/orders')
 
 
-
     })
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     // Listen for changes in the CardElement
     // Display any errors as the customer types their card details
-
     // we are going to listen for changes inside the card element and display any errors as the customer types their card details
-
     // if the event is empty, then disable the button, otherwise, if there is an error show the error, otherwise show nothing !!!!
 
     setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
-  };
+  }
 
   return (
     <div className="payment">
@@ -119,7 +116,7 @@ function Payment() {
 
               <div className="payment__priceContainer">
                 <CurrencyFormat
-                  renderText={(value) => <h3>Order Total: {value}</h3>}
+                  renderText={(value) => ( <h3>Order Total: {value}</h3> )}
                   decimalScale={2}
                   value={getBasketTotal(basket)}
                   displayType={"text"}
