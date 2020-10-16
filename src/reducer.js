@@ -13,31 +13,31 @@ export const initialState = {
 //fancy way of having a for loop and incrementing through it and tallying it up and retur it
 // ? 
 
-export const getBasketTotal = (basket) =>
+export const getBasketTotal = (basket) => 
   basket?.reduce((amount, item) => item.price + amount, 0);
 
-// action is tryign to remove or add .. so it takes a switch
 const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {
     case "ADD_TO_BASKET":
       return {
         ...state,
-        // whatever the basket currently is plus whatever is decided to be added
         basket: [...state.basket, action.item],
       };
     
+    case 'EMPTY_BASKET':
+      return {
+        ...state,
+        basket: []
+      }
+
     case "REMOVE_FROM_BASKET":
       const index = state.basket.findIndex(
         (basketItem) => basketItem.id === action.id
       );
-      //copy of the current basket contents
       let newBasket = [...state.basket];
 
       if (index >= 0) {
-        //cutting it only by 1 inside the array
-        //user friendly code for this kind of build
-
         newBasket.splice(index, 1);
 
       } else {
